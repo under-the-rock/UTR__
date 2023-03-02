@@ -6,6 +6,8 @@ public class FieldItem : MonoBehaviour
 {
     public Item item;
     public SpriteRenderer image;
+    public static int set;
+    public static int sets;
     public void SetItem(Item _item)
     {
         item.itemName = _item.itemName;
