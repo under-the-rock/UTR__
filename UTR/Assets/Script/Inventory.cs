@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Android.Types;
@@ -38,12 +39,32 @@ public class Inventory : MonoBehaviour
     }
     private void Start()
     {
-        slotCnt = 7;
+        slotCnt = 8;
     }
     public bool AddItem(Item _item)
     {
-        if (items.Count < slotCnt)
+        if (FieldItem.set <= 255)
         {
+            FieldItem.set +=1;
+            if (FieldItem.sets==0)
+            {
+                FieldItem.sets = 1;
+            }
+            if (FieldItem.set==1)
+            {
+                items.Add(_item);
+            }
+            if (onChangeItem != null)
+            {
+                onChangeItem.Invoke();
+            }
+            return true;
+
+        }
+        else if (items.Count < slotCnt)
+        {
+            FieldItem.set =0;
+            FieldItem.sets += 1;
             items.Add(_item);
             if (onChangeItem != null)
             {
@@ -60,7 +81,7 @@ public class Inventory : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Item"))
+        if (collision.CompareTag("stoneItem"))
         {
             FieldItem fieldItem = collision.GetComponent<FieldItem>();
             if (AddItem(fieldItem.GetItem()))
@@ -81,6 +102,7 @@ public class Inventory : MonoBehaviour
                     Instantiate(stone, point, Quaternion.identity);
                     items.RemoveAt(0);
                     onChangeItem.Invoke();
+                    
                 }
             }
             
