@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
             FieldItem.set +=1;
             if (FieldItem.sets==0)
             {
-                FieldItem.sets = 1;
+                FieldItem.sets += 1;
             }
             if (FieldItem.set==1)
             {

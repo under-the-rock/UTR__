@@ -27,32 +27,28 @@ public class PlayerMove : MonoBehaviour
     {
         float xmove=0;
         float ymove=0;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
-            xmove = -1;
+            xmove = 1;
             transform.localEulerAngles= new Vector3(0,0,0);
-            lig.transform.localEulerAngles = new Vector3(0, 0, -90);
         } 
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A))
         {
-            xmove= 1;
+            xmove= -1;
             transform.localEulerAngles = new Vector3(0,0,180);
-            lig.transform.localEulerAngles = new Vector3(0, 0,-270);
         }
         if (Input.GetKey(KeyCode.W))
         {
             ymove= 1;
             transform.localEulerAngles = new Vector3(0,0,90);
-            lig.transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             ymove= -1;
             transform.localEulerAngles = new Vector3(0,0,270);
-            lig.transform.localEulerAngles = new Vector3(0, 0, 180);
         }
         rb.velocity= new Vector3(xmove*speed, ymove*speed,0);
-        cam.transform.position = new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,-10);
+        cam.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10);
         lig.transform.position = gameObject.transform.position;
     }
 }
